@@ -1,8 +1,24 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
-import ListGroup from 'react-bootstrap/ListGroup';
+import React, { useState } from 'react';
+import { Card, ListGroup, Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const TodoList = () => {
+    const [todos, setTodos] = useState([
+        {
+            'title'  : 'First Todo',
+            'status' : 'Pending'
+        },
+        {
+            'title'  : 'Second Todo',
+            'status' : 'Done'
+        },
+        {
+            'title'  : 'Third Todo',
+            'status' : 'Done'
+        },
+    ]);
+
     return (  
         <Card>
             <Card.Body>
@@ -11,9 +27,24 @@ const TodoList = () => {
                 </Card.Title>
 
                 <ListGroup>
-                    <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                    <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                    <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                    {
+                        todos.map((todo, index) => (
+                            <ListGroup.Item key={index}>
+                                <div className="float-start">
+                                    {todo.title}
+                                </div>
+                                <div className="float-end">
+                                    <Button variant="outline-success" className="me-2">
+                                        <FontAwesomeIcon icon={faEdit} />
+                                    </Button>
+                                    <Button variant="outline-danger">
+                                        <FontAwesomeIcon icon={faTrash} />
+                                    </Button>
+                                </div>
+                            </ListGroup.Item>
+                        ))
+                    }
+                    
                 </ListGroup>
             </Card.Body>
         </Card>
